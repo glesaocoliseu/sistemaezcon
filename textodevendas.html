@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script de Vendas de Consórcios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .script-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            display: none;
+        }
+        #copyButton {
+            background-color: #007bff;
+        }
+        #copyButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Vendas de Consórcios</h1>
+        <form id="salesForm">
+            <label for="clientName">Nome do Cliente:</label>
+            <input type="text" id="clientName" name="clientName" required>
+
+            <label for="sellerName">Nome do Vendedor:</label>
+            <input type="text" id="sellerName" name="sellerName" required>
+
+            <label for="companyAddress">Endereço da Empresa:</label>
+            <select id="companyAddress" name="companyAddress" required>
+                <option value="Ez Consórcios Av. Lineu Machado, 419 - Jóquei Clube, Fortaleza - CE">Ez Consórcios Av. Lineu Machado, 419 - Jóquei Clube, Fortaleza - CE</option>
+                <option value="Ez Consórcios Av. Edson da Mota Correia, 620, Centro, Caucaia-CE">Ez Consórcios Av. Edson da Mota Correia, 620, Centro, Caucaia-CE</option>
+            </select>
+
+            <button type="button" onclick="generateScript()">Gerar Script de Vendas</button>
+        </form>
+
+        <div class="script-output" id="scriptOutput">
+            <h2>Script de Vendas</h2>
+            <p id="salesScript"></p>
+            <button id="copyButton" onclick="copyScript()">Copiar Script</button>
+        </div>
+    </div>
+
+    <script>
+        function generateScript() {
+            const clientName = document.getElementById('clientName').value;
+            const sellerName = document.getElementById('sellerName').value;
+            const companyAddress = document.getElementById('companyAddress').value;
+
+            const script = `
+                
+                "Olá, ${clientName}! Meu nome é ${sellerName}, e eu sou consultor de vendas de consórcios da ${companyAddress}. Como você está hoje?"<br><br>
+
+               
+                "Eu gostaria de falar um pouco sobre os benefícios de adquirir um consórcio de veículos. Você já ouviu falar sobre como funciona o consórcio?"<br><br>
+
+               
+                "O consórcio é uma forma de você planejar a compra do seu veículo de maneira organizada e sem juros. Funciona assim: você entra em um grupo de consorciados e, mensalmente, todos contribuem com uma parcela. A cada mês, um ou mais participantes são contemplados através de sorteio ou lance e podem adquirir o bem."<br><br>
+
+               
+                "Os principais benefícios do consórcio são:<br>
+                1. <b>Sem Juros:</b> Diferente dos financiamentos, no consórcio você não paga juros.<br>
+                2. <b>Planejamento Financeiro:</b> Você sabe exatamente quanto vai pagar durante todo o período.<br>
+                3. <b>Flexibilidade:</b> Você pode escolher o valor da carta de crédito que mais se adapta às suas necessidades.<br>
+                4. <b>Possibilidade de Lance:</b> Se você tiver uma reserva financeira, pode ofertar um lance para ser contemplado mais rapidamente."<br><br>
+
+                
+                "Por exemplo, se você optar por uma carta de crédito de R$ 50.000,00, pode escolher um plano que se encaixe no seu orçamento, com parcelas acessíveis e sem surpresas."<br><br>
+
+               
+                "Gostaria de agendar uma visita para conversarmos mais detalhadamente sobre os planos disponíveis? Assim, posso entender melhor suas necessidades e oferecer a melhor opção de consórcio para você."<br><br>
+
+                
+                "Se você tiver alguma dúvida, fique à vontade para perguntar. Estou aqui para ajudar e esclarecer qualquer questão sobre o consórcio."<br><br>
+
+               
+                "Então, quando seria um bom horário para agendarmos nossa conversa? Tenho certeza de que podemos encontrar o plano perfeito para você."<br><br>
+
+                
+                "Muito obrigado pelo seu tempo! Espero falar com você em breve.
+            `;
+
+            document.getElementById('salesScript').innerHTML = script;
+            document.getElementById('scriptOutput').style.display = 'block';
+        }
+
+        function copyScript() {
+            const scriptText = document.getElementById('salesScript').innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = scriptText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Script copiado para a área de transferência!');
+        }
+    </script>
+    <a style='position:absolute;left:45%' href="index.html">Voltar</a>
+</body>
+</html>
