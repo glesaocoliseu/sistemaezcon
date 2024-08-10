@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso à Simulação</title>
+</head>
+<body>
+
+<h1>Acesso à Simulação</h1>
+<p>Clique no link abaixo para acessar a simulação. Será necessário fornecer uma senha de 6 dígitos.</p>
+<a href="#" onclick="verificarSenha()">Fazer uma simulação</a>
+
+<script>
+function verificarSenha() {
+    var senha = prompt("Digite a senha de 6 dígitos:");
+    var senhaCorretaHash = "e10adc3949ba59abbe56e057f20f883e"; // Hash MD5 para "123456"
+
+    if (md5(senha) === senhaCorretaHash) {
+        window.location.href = "simulacao.html";
+    } else {
+        alert("Senha incorreta. Tente novamente.");
+    }
+}
+
+// Função de hash MD5
+function md5(string) {
+    return CryptoJS.MD5(string).toString();
+}
+</script>
+
+<!-- Biblioteca CryptoJS para hashing MD5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <br>
+    <br>
+    <a href="index.html">Voltar</a>
+
+</body>
+</html>
