@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>criar panfleto</title>
+    <title>Criar Panfleto</title>
     <style>
         body {
             background-color: white;
-        }
-        h2, p {
-           
+            font-family: Arial, sans-serif;
         }
         input {
             width: 200px;
@@ -24,6 +22,8 @@
             padding: 10px 20px;
             border-radius: 5px;
             font-size: 20px;
+            background-color: #e5e2e8;
+            border: none;
         }
         .contact-info {
             font-family: Arial, sans-serif;
@@ -39,40 +39,91 @@
             color: #007bff;
             text-decoration: none;
         }
+        .panfleto-container {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+        .panfleto-container img {
+            width: 8cm;
+            height: 15cm;
+            display: block;
+        }
+        .panfleto-text {
+            position: absolute;
+            top: 13.3cm; /* Desloca o texto para baixo */
+            left: 120px; /* Desloca o texto para a direita */
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: transparent; /* Fundo transparente */
+            padding: 0;
+            margin: 0;
+            line-height: 1.2; /* Reduz o espaçamento entre linhas */
+        }
+        .panfleto-text p {
+            margin: 0; /* Remove a margem dos parágrafos */
+        }
     </style>
 </head>
 <body>
     
     <form>
         <p style="font-size: 20px;">Nome do Vendedor</p>
-        <input type="text" id="nome" name="nome">
+        <input type="text" id="nome" name="nome" oninput="transformToUpperCase(this)">
         <br>
         <p style="font-size: 20px;">Telefone do Vendedor</p>
-        <input type="text" id="telefone" name="telefone">
+        <input type="text" id="telefone" name="telefone" oninput="formatPhoneNumber(this)">
     </form>
     <br><br>
     <button onclick="gerarImagens()">Gerar imagens</button>
 
-    
     <script>
+        function transformToUpperCase(input) {
+            input.value = input.value.toUpperCase();
+        }
+
+        function formatPhoneNumber(input) {
+            let value = input.value;
+            // Remove all non-numeric characters except parentheses and spaces
+            value = value.replace(/[^0-9() ]/g, '');
+
+            // Format the phone number with parentheses and spaces
+            if (value.length > 10) {
+                value = value.replace(/^(\d{2})(\d{1})(\d{4})(\d{4})$/, '($1) $2 $3-$4');
+            } else if (value.length > 5) {
+                value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d{0,4})$/, '($1) $2');
+            }
+
+            input.value = value;
+        }
+
         function gerarImagens() {
             var nome = document.getElementById("nome").value;
             var telefone = document.getElementById("telefone").value;
 
             document.body.innerHTML = '<button id="imprimir" onclick="window.print()">Imprimir</button>';
 
-            document.body.innerHTML += "<br><br>_____________________________________________________________________";
-            document.body.innerHTML += "<br><br><b></b> " + telefone;
-            document.body.innerHTML += "<br><b></b> " + nome;
-            document.body.innerHTML += "<br><br><img src='image/panfleto1.png' style='width: 8cm; height: 15cm;'>";
-            document.body.innerHTML += "<br><br>_____________________________________________________________________";
-			document.body.innerHTML += "<br><br><img src='image/panfleto2.png' style='width: 8cm; height: 15cm;'>";
-            document.body.innerHTML += "<br><br>_____________________________________________________________________";
-			
+            var imagensHtml = `
+                <div class="panfleto-container">
+                    <img src="image/panfleto1.png" alt="Panfleto 1">
+                    <div class="panfleto-text">
+                        <p>${nome}</p>
+                        <p>${telefone}</p>
+                    </div>
+                </div>
+                <div class="panfleto-container">
+                    <img src="image/panfleto2.png" alt="Panfleto 2">
+                </div>
+            `;
+
+            document.body.innerHTML += imagensHtml;
         }
     </script>
-	<br>
-		<br>
-		<a href="index.html"> Voltar </a>
+    <br>
+    <br>
+    <a href="index.html">Voltar</a>
 </body>
 </html>
