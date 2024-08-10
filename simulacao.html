@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação</title>
+</head>
+<body>
+<h1>Simulação</h1>
+<p>Valor da carta de crédito (R$)</p>
+<input type="number" id="valorCartaCredito">
+<br>
+<p>Quantidade de parcelas</p>
+<input type="number" id="quantidadeParcelas">
+<br>
+<p>Valor da primeira parcela (adesão) (R$)</p>
+<input type="number" id="valorPrimeiraParcela">
+<br>
+<p>Valor das próximas parcelas (R$)</p>
+<input type="number" id="valorParcelas">
+<br>
+<p>Valor da entrada/lance (R$)</p>
+<input type="number" id="lance">
+<br>
+<p>Valor do veículo (R$)</p>
+<input type="number" id="valorVeiculo">
+<br>
+<br>
+<button onclick="calcular()">Calcular</button>
+<br>
+<br>
+<button onclick="limpar()">Limpar</button>
+
+<h2>Resultado da Simulação</h2>
+<p id="resultadoParcelasAjustadas"></p>
+<p id="resultadoLance"></p>
+
+<script>
+function calcular() {
+    // Obtém os valores dos campos de entrada
+    var lance = parseFloat(document.getElementById('lance').value);
+    var valorParcelas = parseFloat(document.getElementById('valorParcelas').value);
+    var quantidadeParcelas = parseFloat(document.getElementById('quantidadeParcelas').value);
+    
+    // Calcula a quantidade de parcelas ajustadas
+    var quantidadeParcelasAjustadas = lance / valorParcelas;
+    var novasParcelas = quantidadeParcelas - quantidadeParcelasAjustadas;
+    
+    // Exibe os resultados
+    document.getElementById('resultadoParcelasAjustadas').textContent = 
+        'Quantidade de parcelas ajustadas: ' + novasParcelas.toFixed(2);
+    document.getElementById('resultadoLance').textContent = 
+        'Valor do lance: R$ ' + lance.toFixed(2);
+}
+
+function limpar() {
+    // Limpa todos os campos de entrada
+    document.getElementById('valorCartaCredito').value = '';
+    document.getElementById('quantidadeParcelas').value = '';
+    document.getElementById('valorPrimeiraParcela').value = '';
+    document.getElementById('valorParcelas').value = '';
+    document.getElementById('lance').value = '';
+    document.getElementById('valorVeiculo').value = '';
+    
+    // Limpa os resultados exibidos
+    document.getElementById('resultadoParcelasAjustadas').textContent = '';
+    document.getElementById('resultadoLance').textContent = '';
+}
+</script>
+    <br>
+    <br>
+    <a href="index.html">Voltar</a>
+
+</body>
+</html>
