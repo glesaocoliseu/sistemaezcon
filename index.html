@@ -389,7 +389,36 @@
         display.value = '';
     }
 </script>
+<br>
+	    <bt>
+		    <br>
+		     <h2 style="color: #0566B1;">Minhas Anotações</h2>
+    
+    <textarea id="notes" style="width: 100%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; resize: none;" placeholder="Escreva suas anotações aqui..."></textarea>
+    
+    <button style="background-color: #0566B1; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;" onclick="saveNotes()">Salvar Anotações</button>
 
+    <script>
+        // Carregar as anotações salvas do localStorage quando a página é carregada
+        window.onload = function() {
+            var savedNotes = localStorage.getItem("userNotes");
+            if (savedNotes) {
+                document.getElementById("notes").value = savedNotes;
+            }
+        }
+
+        // Função para salvar as anotações no localStorage
+        function saveNotes() {
+            var notes = document.getElementById("notes").value;
+            if (notes.trim() !== "") {
+                localStorage.setItem("userNotes", notes);
+                alert("Anotações salvas!");
+            } else {
+                alert("Por favor, digite algo.");
+            }
+        }
+    </script>
+	    
 	          
 	   
 	    
